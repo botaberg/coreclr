@@ -21,10 +21,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Project Include="*\**\*.csproj" Exclude="@(DisabledProjects)">
-        <AdditionalProperties>OSGroup=$(OSGroup)</AdditionalProperties>
-      </Project>
-      <Project Include="*\**\*.ilproj" Exclude="@(DisabledProjects)">
+      <Project Include="Interop\**\*.csproj" Exclude="@(DisabledProjects)">
         <AdditionalProperties>OSGroup=$(OSGroup)</AdditionalProperties>
       </Project>
     </ItemGroup>
