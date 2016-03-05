@@ -19,10 +19,10 @@ namespace EnumRoundtrip
         #region pinvoke declarations
         //cdecl
 
-        [DllImport("MarshalEnumNative.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("MarshalEnumNative", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CdeclEnum(DialogResult r, ref bool result);
 
-        [DllImport("MarshalEnumNative.dll", EntryPoint = "GetFptr")]
+        [DllImport("MarshalEnumNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclEnumDelegate GetFptrCdeclEnum(int i);
 

@@ -98,35 +98,35 @@ namespace PInvokeTests
 
         #region cdecl
         //Simple struct - sequential layout by ref
-        [DllImport("SimpleStructNative.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("SimpleStructNative", CallingConvention = CallingConvention.Cdecl)]
         private static extern bool CdeclSimpleStructByRef(ref Sstr p);
 
-        [DllImport("SimpleStructNative.dll", EntryPoint = "GetFptr")]
+        [DllImport("SimpleStructNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclSimpleStructByRefDelegate GetFptrCdeclSimpleStructByRef(int i);
 
         //Simple struct - sequential layout by value
-        [DllImport("SimpleStructNative.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("SimpleStructNative", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr CdeclSimpleStruct(Sstr_simple p, ref bool retval);
 
-        [DllImport("SimpleStructNative.dll", EntryPoint = "GetFptr")]
+        [DllImport("SimpleStructNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclSimpleStructDelegate GetFptrCdeclSimpleStruct(int i);
 
         //Simple struct - explicit layout by value
-        [DllImport("SimpleStructNative.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("SimpleStructNative", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr CdeclSimpleExplStruct(ExplStruct p, ref bool retval);
 
-        [DllImport("SimpleStructNative.dll", EntryPoint = "GetFptr")]
+        [DllImport("SimpleStructNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclSimpleExplStructDelegate GetFptrCdeclSimpleExplStruct(int i);
 
         //Simple struct - explicit layout by ref
-        [DllImport("SimpleStructNative.dll", EntryPoint = "GetFptr")]
+        [DllImport("SimpleStructNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclSimpleExplStructByRefDelegate GetFptrCdeclSimpleExplStructByRef(int i);
 
-        [DllImport("SimpleStructNative.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("SimpleStructNative", CallingConvention = CallingConvention.Cdecl)]
         private static extern bool CdeclSimpleExplStructByRef(ref ExplStruct p);
         
         #endregion

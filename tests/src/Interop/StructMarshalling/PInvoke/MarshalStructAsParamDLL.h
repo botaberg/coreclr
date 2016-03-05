@@ -1,10 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
-#include <tchar.h>
-#include <memory.h>
-#include <wchar.h>
 #include <xplatform.h>
 
 const int NumArrElements = 2;
