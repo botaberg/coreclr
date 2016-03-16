@@ -1,59 +1,63 @@
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
 
 public class Common
 {
     public const int NumArrElements = 2;
 }
-
 //////////////////////////////struct definition///////////////////////////
 [StructLayout(LayoutKind.Sequential)]
 public struct InnerSequential
 {
     public int f1;
     public float f2;
-    [MarshalAs(UnmanagedType.BStr)]
     public String f3;
 }
 
-[StructLayout(LayoutKind.Explicit)]
-public struct InnerExplicit1
+[StructLayout(LayoutKind.Sequential)]
+public struct ComplexStruct
 {
-    [FieldOffset(0)]
-    public int f1;
-    [FieldOffset(4)]
-    public float f2;
-    [FieldOffset(8)]
-    [MarshalAs(UnmanagedType.BStr)]
-    public String f3;
-}
-
-[StructLayout(LayoutKind.Explicit, CharSet = CharSet.Ansi)]
-public struct StringExplicit
-{
-    [FieldOffset(0)]
+    public int i;
+    [MarshalAs(UnmanagedType.I1)]
+    public bool b;
     [MarshalAs(UnmanagedType.LPStr)]
-    public String str1;
-
-    [FieldOffset(8)]
-    [MarshalAs(UnmanagedType.LPTStr)]
-    public String str2;
-
-    [FieldOffset(16)]
-    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
-    public String charr;
+    public string str;
+    public IntPtr pedding;
+    public ScriptParamType type;
 }
 
 [StructLayout(LayoutKind.Explicit)]
-public struct InnerExplicit2
+public struct ScriptParamType
+{
+    [FieldOffset(0)]
+    public int idata;
+    [FieldOffset(8)]
+    public bool bdata;
+    [FieldOffset(8)]
+    public double ddata;
+    [FieldOffset(8)]
+    public IntPtr ptrdata;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public struct INNER2
 {
     [FieldOffset(0)]
     public int f1;
     [FieldOffset(4)]
     public float f2;
+    [FieldOffset(8)] 
+    public String f3;
+}
+
+[StructLayout(LayoutKind.Explicit)]
+public struct InnerExplicit
+{
+    [FieldOffset(0)]
+    public int f1;
+    [FieldOffset(0)]
+    public float f2;
     [FieldOffset(8)]
-    [MarshalAs(UnmanagedType.BStr)]
     public String f3;
 }
 
@@ -65,26 +69,24 @@ public struct InnerArraySequential
 }
 
 [StructLayout(LayoutKind.Explicit, Pack = 8)]
-public struct InnerArrayExplicit1
+public struct InnerArrayExplicit
 {
     [FieldOffset(0)]
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Common.NumArrElements)]
     public InnerSequential[] arr;
 
-    [FieldOffset(32)]
-    [MarshalAs(UnmanagedType.BStr)]
+    [FieldOffset(8)]
     public string f4;
 }
 
 [StructLayout(LayoutKind.Explicit)]
-public struct InnerArrayExplicit2
+public struct OUTER3
 {
     [FieldOffset(0)]
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Common.NumArrElements)]
     public InnerSequential[] arr;
 
-    [FieldOffset(32)]
-    [MarshalAs(UnmanagedType.BStr)]
+    [FieldOffset(24)]
     public string f4;
 }
 
@@ -105,24 +107,25 @@ public struct CharSetUnicodeSequential
 [StructLayout(LayoutKind.Sequential)]
 public struct NumberSequential
 {
+    public Int64 i64;
+    public UInt64 ui64;
+    public Double d;
     public int i32;
     public uint ui32;
     public short s1;
     public ushort us1;
-    public Byte b;
-    public SByte sb;
     public Int16 i16;
     public UInt16 ui16;
-    public Int64 i64;
-    public UInt64 ui64;
     public Single sgl;
-    public Double d;
+    public Byte b;
+    public SByte sb; 
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct StructSeqWithArrayField
+public struct S3
 {
     public bool flag;
+    [MarshalAs(UnmanagedType.LPStr)]
     public string str;
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
     public int[] vals;
@@ -136,9 +139,8 @@ public struct S4
 }
 
 public enum Enum1 { e1 = 1, e2 = 3 };
-
 [StructLayout(LayoutKind.Sequential)]
-public struct StructSeqWithEnumField
+public struct S5
 {
     public S4 s4;
     public Enum1 ef;
@@ -147,7 +149,6 @@ public struct StructSeqWithEnumField
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 public struct StringStructSequentialAnsi
 {
-    [MarshalAs(UnmanagedType.BStr)]
     public string first;
     public string last;
 }
@@ -155,67 +156,58 @@ public struct StringStructSequentialAnsi
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 public struct StringStructSequentialUnicode
 {
-    [MarshalAs(UnmanagedType.BStr)]
     public string first;
     public string last;
 }
-
 [StructLayout(LayoutKind.Sequential)]
-public struct PritypeStructSeqWithUnmanagedType
+public struct S8
 {
-    [MarshalAs(UnmanagedType.BStr)]
     public string name;
-    [MarshalAs(UnmanagedType.VariantBool)]
     public bool gender;
-    //[MarshalAs(UnmanagedType.Currency)] //In ProjectN V1, we dont support Marshal Decimal as Currency
-    //public decimal wage;
+    [MarshalAs(UnmanagedType.Error)]
+    public int i32;
+    [MarshalAs(UnmanagedType.Error)]
+    public uint ui32;
     [MarshalAs(UnmanagedType.U2)]
     public UInt16 jobNum;
-    //[MarshalAs(UnmanagedType.Error)] //In ProjectN V1, we dont support MarshalAs Error 
-    //public int i32;
-    //[MarshalAs(UnmanagedType.Error)]
-    //public uint ui32;
     [MarshalAs(UnmanagedType.I1)]
     public sbyte mySByte;
 }
 
-public struct StructSequentialWithDelegateField
+public struct S9
 {
-    //[MarshalAs(UnmanagedType.Error)] //In ProjectN V1, we dont support MarshalAs Error 
-    //public int i32;
+    [MarshalAs(UnmanagedType.Error)]
+    public int i32;
     public TestDelegate1 myDelegate1;
 }
 
-public delegate void TestDelegate1(StructSequentialWithDelegateField myStruct);
+public delegate void TestDelegate1(S9 myStruct);
 
 [StructLayout(LayoutKind.Sequential)]
 public struct IntergerStructSequential
 {
     public int i;
 }
-
 [StructLayout(LayoutKind.Sequential)]
 public struct OuterIntergerStructSequential
 {
     public int i;
     public IntergerStructSequential s_int;
 }
-
 [StructLayout(LayoutKind.Sequential)]
 public struct IncludeOuterIntergerStructSequential
 {
     public OuterIntergerStructSequential s;
 }
-
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct StructSequentialWithPointerField
+public unsafe struct S11
 {
     public int* i32;
     public int i;
 }
 
 [StructLayout(LayoutKind.Explicit)]
-public struct NumberExplicit
+public struct U
 {
     [FieldOffset(0)]
     public int i32;
@@ -278,11 +270,3 @@ public struct LongStructPack16Explicit
     [FieldOffset(8)]
     public long l2;
 }
-
-[StructLayout(LayoutKind.Sequential)]
-public struct RecursivelyImportedStruct
-{
-    public DelegateCausesRecursion del;
-}
-
-public delegate int DelegateCausesRecursion(ref RecursivelyImportedStruct ris);
