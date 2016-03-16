@@ -332,7 +332,7 @@ void PrintCharSetUnicodeSequential(CharSetUnicodeSequential* p, char const * nam
 
 void ChangeCharSetUnicodeSequential(CharSetUnicodeSequential* p)
 {
-	LPCWSTR strSource = u"change string";
+	LPCWSTR strSource = L"change string";
 	int len = wcslen(strSource);
 	LPCWSTR temp = (LPCWSTR)TP_CoTaskMemAlloc(sizeof(WCHAR)*(len+1));
 	if(temp != NULL)
@@ -349,7 +349,7 @@ void ChangeCharSetUnicodeSequential(CharSetUnicodeSequential* p)
 
 bool IsCorrectCharSetUnicodeSequential(CharSetUnicodeSequential* p)
 {
-	LPCWSTR expected= u"some string";
+	LPCWSTR expected= L"some string";
 	LPCWSTR actual = p->f1;
 	if(0 != TP_wcmp_s((WCHAR*)actual, (WCHAR*)expected))
 	{
