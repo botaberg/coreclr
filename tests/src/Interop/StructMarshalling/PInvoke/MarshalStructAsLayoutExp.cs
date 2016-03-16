@@ -43,166 +43,166 @@ public class Managed
     }
 
     #region	Struct with Layout Explicit scenario1
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValINNER2(INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefINNER2(ref INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
     static extern bool MarshalStructAsParam_AsExpByValInINNER2([In] INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInINNER2([In] ref INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
     static extern bool MarshalStructAsParam_AsExpByValOutINNER2([Out] INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutINNER2(out INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValINNER2")]
     static extern bool MarshalStructAsParam_AsExpByValInOutINNER2([In, Out] INNER2 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefINNER2")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefINNER2")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutINNER2([In, Out] ref INNER2 str1);
     #endregion
     #region Struct with Layout Explicit scenario2
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValInnerExplicit(InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInnerExplicit(ref InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValInInnerExplicit([In] InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefInInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefInInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInInnerExplicit([In] ref InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutInnerExplicit([Out] InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefOutInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefOutInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByRefOutInnerExplicit(out InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutInnerExplicit([In, Out] InnerExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerExplicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutInnerExplicit([In, Out] ref InnerExplicit str1);
     #endregion
     #region Struct with Layout Explicit scenario3
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValInnerArrayExplicit(InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInnerArrayExplicit(ref InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValInInnerArrayExplicit([In] InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInInnerArrayExplicit([In] ref InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutInnerArrayExplicit([Out] InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit(out InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValInnerArrayExplicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit([In, Out] InnerArrayExplicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerArrayExplicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefInnerArrayExplicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit([In, Out] ref InnerArrayExplicit str1);
     #endregion
     #region Struct with Layout Explicit scenario4
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValOUTER3(OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOUTER3(ref OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
     static extern bool MarshalStructAsParam_AsExpByValInOUTER3([In] OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInOUTER3([In] ref OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
     static extern bool MarshalStructAsParam_AsExpByValOutOUTER3([Out] OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutOUTER3(out OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValOUTER3")]
     static extern bool MarshalStructAsParam_AsExpByValInOutOUTER3([In, Out] OUTER3 str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefOUTER3")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefOUTER3")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutOUTER3([In, Out] ref OUTER3 str1);
     #endregion
     #region Struct(U) with Layout Explicit scenario5
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValU(U str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefU(ref U str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
     static extern bool MarshalStructAsParam_AsExpByValInU([In] U str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInU([In] ref U str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
     static extern bool MarshalStructAsParam_AsExpByValOutU([Out] U str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutU(out U str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValU")]
     static extern bool MarshalStructAsParam_AsExpByValInOutU([In, Out] U str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefU")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefU")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutU([In, Out] ref U str1);
     #endregion
 
     #region Struct(ByteStructPack2Explicit) with Layout Explicit scenario6
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValByteStructPack2Explicit(ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefByteStructPack2Explicit(ref ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInByteStructPack2Explicit([In] ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInByteStructPack2Explicit([In] ref ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutByteStructPack2Explicit([Out] ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutByteStructPack2Explicit(out ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValByteStructPack2Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutByteStructPack2Explicit([In, Out] ByteStructPack2Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefByteStructPack2Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefByteStructPack2Explicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit([In, Out] ref ByteStructPack2Explicit str1);
     #endregion
     #region Struct(ShortStructPack4Explicit) with Layout Explicit scenario7
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValShortStructPack4Explicit(ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefShortStructPack4Explicit(ref ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInShortStructPack4Explicit([In] ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInShortStructPack4Explicit([In] ref ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutShortStructPack4Explicit([Out] ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutShortStructPack4Explicit(out ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValShortStructPack4Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutShortStructPack4Explicit([In, Out] ShortStructPack4Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefShortStructPack4Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefShortStructPack4Explicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit([In, Out] ref ShortStructPack4Explicit str1);
     #endregion    
     #region Struct(IntStructPack8Explicit) with Layout Explicit scenario8
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValIntStructPack8Explicit(IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefIntStructPack8Explicit(ref IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInIntStructPack8Explicit([In] IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInIntStructPack8Explicit([In] ref IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutIntStructPack8Explicit([Out] IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutIntStructPack8Explicit(out IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValIntStructPack8Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutIntStructPack8Explicit([In, Out] IntStructPack8Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefIntStructPack8Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefIntStructPack8Explicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutIntStructPack8Explicit([In, Out] ref IntStructPack8Explicit str1);
     #endregion
     #region Struct(LongStructPack16Explicit) with Layout Explicit scenario9
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByValLongStructPack16Explicit(LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefLongStructPack16Explicit(ref LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInLongStructPack16Explicit([In] LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit([In] ref LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit([Out] LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll")]
+    [DllImport("MarshalStructAsParamDLL")]
     static extern bool MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit(out LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByValLongStructPack16Explicit")]
     static extern bool MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit([In, Out] LongStructPack16Explicit str1);
-    [DllImport("MarshalStructAsParamDLL.dll", EntryPoint = "MarshalStructAsParam_AsExpByRefLongStructPack16Explicit")]
+    [DllImport("MarshalStructAsParamDLL", EntryPoint = "MarshalStructAsParam_AsExpByRefLongStructPack16Explicit")]
     static extern bool MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit([In, Out] ref LongStructPack16Explicit str1);
     #endregion
 
