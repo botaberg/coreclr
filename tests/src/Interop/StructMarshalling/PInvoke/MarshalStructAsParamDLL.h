@@ -1,6 +1,5 @@
 #include "platformdefines.cpp"
 #include <xplatform.h>
-#include <wchar.h>
 
 const int NumArrElements = 2;
 struct InnerSequential
