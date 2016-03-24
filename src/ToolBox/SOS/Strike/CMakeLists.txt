@@ -83,6 +83,14 @@ if(WIN32)
     psapi.lib
     ntdll.lib
   )
+
+  # ARM64_TODO: Enable this for Windows Arm64
+  if (NOT CLR_CMAKE_PLATFORM_ARCH_ARM64)
+      list(APPEND SOS_LIBRARY 
+        ${STATIC_MT_VCRT_LIB}
+      )
+  endif()
+    
 else(WIN32)
   add_definitions(-DFEATURE_ENABLE_HARDWARE_EXCEPTIONS)
   add_definitions(-DPAL_STDCPP_COMPAT=1)
@@ -138,9 +146,8 @@ add_dependencies(sos mscordaccore)
 target_link_libraries(sos ${SOS_LIBRARY})
 
 # add the install targets
-install (TARGETS sos DESTINATION .)
-if(WIN32)
-  install (FILES ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/sos.pdb DESTINATION PDB)
-else(WIN32)
-  install (FILES sosdocsunix.txt DESTINATION .)
-endif(WIN32)
+install_clr(sos)
+
+if(NOT WIN32)
+  install(FILES sosdocsunix.txt DESTINATION .)
+endif(NOT WIN32)

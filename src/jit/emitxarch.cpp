@@ -2569,9 +2569,9 @@ void emitter::emitInsMov(instruction ins, emitAttr attr, GenTree* node)
         {
             GenTreeIndir* mem = node->AsIndir();
             
-            if (mem->HasBase() && mem->Base()->OperGet() == GT_CLS_VAR_ADDR)
+            if (mem->Addr()->OperGet() == GT_CLS_VAR_ADDR)
             {
-                emitIns_R_C(ins, attr, node->gtRegNum, mem->Base()->gtClsVar.gtClsVarHnd, 0);
+                emitIns_R_C(ins, attr, node->gtRegNum, mem->Addr()->gtClsVar.gtClsVarHnd, 0);
                 return;
             }
             else if (mem->Addr()->OperGet() == GT_LCL_VAR_ADDR)
@@ -2586,7 +2586,6 @@ void emitter::emitInsMov(instruction ins, emitAttr attr, GenTree* node)
                 GenTreePtr addr = mem->Addr();
 
                 assert (addr->OperIsAddrMode() ||
-                        addr->gtOper == GT_CLS_VAR_ADDR ||
                         (addr->IsCnsIntOrI() && addr->isContained()) ||
                         !addr->isContained());
                 size_t offset = mem->Offset();
@@ -2618,15 +2617,15 @@ void emitter::emitInsMov(instruction ins, emitAttr attr, GenTree* node)
             size_t offset = mem->Offset();
             GenTree* data = node->gtOp.gtOp2;
 
-            if ((memBase != nullptr) && (memBase->OperGet() == GT_CLS_VAR_ADDR))
+            if (mem->Addr()->OperGet() == GT_CLS_VAR_ADDR)
             {
                 if (data->isContained())
                 {
-                    emitIns_C_I(ins, attr, memBase->gtClsVar.gtClsVarHnd, 0, (int) data->AsIntConCommon()->IconValue());
+                    emitIns_C_I(ins, attr, mem->Addr()->gtClsVar.gtClsVarHnd, 0, (int) data->AsIntConCommon()->IconValue());
                 }
                 else
                 {
-                    emitIns_C_R(ins, attr, memBase->gtClsVar.gtClsVarHnd, data->gtRegNum, 0);
+                    emitIns_C_R(ins, attr, mem->Addr()->gtClsVar.gtClsVarHnd, data->gtRegNum, 0);
                 }
                 return;
             }
@@ -6934,11 +6933,11 @@ PRINT_CONSTANT:
 
         if (IsAVXInstruction(ins))
         {
-            printf("%s, %s", emitYMMregName((unsigned)id->idReg1()), sstr);
+            printf(", %s", emitYMMregName((unsigned)id->idReg1()));
         }
         else if (IsSSE2Instruction(ins))
         {
-            printf(", %s", emitXMMregName((unsigned)id->idReg1()), sstr);
+            printf(", %s", emitXMMregName((unsigned)id->idReg1()));
         }
         else
         {
@@ -7027,7 +7026,17 @@ PRINT_CONSTANT:
         {
             printf("%s, %s", emitRegName(id->idReg2(), attr), emitXMMregName((unsigned)id->idReg1()));
         }
-        else if  (ins == INS_cvttsd2si)
+#ifndef LEGACY_BACKEND
+        else if  ((ins == INS_cvtsi2ss) || (ins == INS_cvtsi2sd))
+        {
+            printf(" %s, %s",  emitXMMregName((unsigned)id->idReg1()), emitRegName(id->idReg2(), attr));
+        }
+#endif
+        else if  ((ins == INS_cvttsd2si) 
+#ifndef LEGACY_BACKEND
+                  || (ins == INS_cvtss2si) || (ins == INS_cvtsd2si) || (ins == INS_cvttss2si)
+#endif
+                 )
         {
             printf(" %s, %s",  emitRegName(id->idReg1(), attr), emitXMMregName((unsigned)id->idReg2()));
         }
@@ -11192,8 +11201,7 @@ size_t              emitter::emitOutputInstr(insGroup* ig, instrDesc* id, BYTE**
     {
         // set JitEmitPrintRefRegs=1 will print out emitThisGCrefRegs and emitThisByrefRegs
         // at the beginning of this method.
-        static ConfigDWORD fJitEmitPrintRefRegs;
-        if (fJitEmitPrintRefRegs.val(CLRConfig::INTERNAL_JitEmitPrintRefRegs) != 0)
+        if (JitConfig.JitEmitPrintRefRegs() != 0)
         {
             printf("Before emitOutputInstr for id->idDebugOnlyInfo()->idNum=0x%02x\n", id->idDebugOnlyInfo()->idNum);
             printf("  emitThisGCrefRegs(0x%p)=", emitComp->dspPtr(&emitThisGCrefRegs));
@@ -11208,8 +11216,7 @@ size_t              emitter::emitOutputInstr(insGroup* ig, instrDesc* id, BYTE**
 
         // For example, set JitBreakEmitOutputInstr=a6 will break when this method is called for
         // emitting instruction a6, (i.e. IN00a6 in jitdump).
-        static ConfigDWORD fJitBreakEmitOutputInstr;
-        if ((unsigned)fJitBreakEmitOutputInstr.val(CLRConfig::INTERNAL_JitBreakEmitOutputInstr) == id->idDebugOnlyInfo()->idNum)
+        if ((unsigned)JitConfig.JitBreakEmitOutputInstr() == id->idDebugOnlyInfo()->idNum)
         {
             assert(!"JitBreakEmitOutputInstr reached");
         }

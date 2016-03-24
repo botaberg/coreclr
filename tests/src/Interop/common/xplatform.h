@@ -1,3 +1,7 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
 #ifndef __XPLAT_H__
 #define __XPLAT_H__
 
@@ -30,6 +34,11 @@
 // dllexport
 #if defined _WIN32
 #define DLL_EXPORT __declspec(dllexport)
+
+#ifndef snprintf
+#define snprintf _snprintf
+#endif //snprintf
+
 #else //!_Win32
 #if __GNUC__ >= 4    
 #define DLL_EXPORT __attribute__ ((visibility ("default")))
@@ -45,9 +54,11 @@
 #if __i386__
 #define __stdcall __attribute__((stdcall))
 #define _cdecl __attribute__((cdecl))
+#define __cdecl __attribute__((cdecl))
 #else
 #define __stdcall
 #define _cdecl
+#define __cdecl
 #endif
 #endif
 
@@ -88,6 +99,15 @@ typedef union tagCY {
 	};
 	long int64;
 } CY, CURRENCY;
+
+
+class IUnknown
+{
+public:
+  virtual int  QueryInterface(void* riid,void** ppvObject);
+  virtual unsigned long  AddRef();
+  virtual unsigned long  Release();
+};
 
 #define CoTaskMemAlloc(p) malloc(p)
 #define CoTaskMemFree(p) free(p)

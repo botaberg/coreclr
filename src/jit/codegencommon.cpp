@@ -2674,15 +2674,22 @@ void            CodeGen::genJumpToThrowHlpBlk(emitJumpKind          jumpKind,
         /* The code to throw the exception will be generated inline, and
            we will jump around it in the normal non-exception case */
 
-        BasicBlock * tgtBlk = genCreateTempLabel();
-        jumpKind = emitter::emitReverseJumpKind(jumpKind);
-        inst_JMP(jumpKind, tgtBlk);
+        BasicBlock * tgtBlk = nullptr;
+        emitJumpKind reverseJumpKind = emitter::emitReverseJumpKind(jumpKind);
+        if (reverseJumpKind != jumpKind)
+        {
+            tgtBlk = genCreateTempLabel();
+            inst_JMP(reverseJumpKind, tgtBlk);
+        }
 
         genEmitHelperCall(compiler->acdHelper(codeKind), 0, EA_UNKNOWN);
 
         /* Define the spot for the normal non-exception case to jump to */
-
-        genDefineTempLabel(tgtBlk);
+        if (tgtBlk != nullptr)
+        {
+            assert(reverseJumpKind != jumpKind);
+            genDefineTempLabel(tgtBlk);
+        }
     }
 }
 
@@ -3033,13 +3040,11 @@ void                CodeGen::genGenerateCode(void * * codePtr,
     // ugliness of having the failure here.
     if (!compiler->jitFallbackCompile)
     {
-        // Use COMPLUS_JitNoForceFallback=1 to prevent NOWAY assert testing from happening,
+        // Use COMPlus_JitNoForceFallback=1 to prevent NOWAY assert testing from happening,
         // especially that caused by enabling JIT stress.
-        static ConfigDWORD fJitNoForceFallback;
-        if (!fJitNoForceFallback.val(CLRConfig::INTERNAL_JitNoForceFallback))
+        if (!JitConfig.JitNoForceFallback())
         {
-            static ConfigDWORD fJitForceFallback;
-            if (fJitForceFallback.val(CLRConfig::INTERNAL_JitForceFallback) ||
+            if (JitConfig.JitForceFallback() ||
                 compiler->compStressCompile(Compiler::STRESS_GENERIC_VARN, 5) )
             {
                 NO_WAY_NOASSERT("Stress failure");
@@ -3898,9 +3903,15 @@ void            CodeGen::genFnPrologCalleeRegArgs(regNumber xtraReg,
         {
 #if defined(FEATURE_UNIX_AMD64_STRUCT_PASSING)
             return type;
-#else // defined(FEATURE_UNIX_AMD64_STRUCT_PASSING)
+#elif defined(_TARGET_ARM_)
+            LclVarDsc varDsc = compiler->lvaTable[varNum];
+            return varDsc.lvIsHfaRegArg ? varDsc.GetHfaType() : varDsc.lvType;
+
+    // TODO-ARM64: Do we need the above to handle HFA structs on ARM64?
+
+#else // !_TARGET_ARM_
             return compiler->lvaTable[varNum].lvType;
-#endif // defined(FEATURE_UNIX_AMD64_STRUCT_PASSING)            
+#endif // !_TARGET_ARM_
         }
     } regArgTab [max(MAX_REG_ARG,MAX_FLOAT_REG_ARG)] = { };
 
@@ -4069,28 +4080,21 @@ void            CodeGen::genFnPrologCalleeRegArgs(regNumber xtraReg,
             slots = 1;
 
 #if FEATURE_MULTIREG_ARGS
-#ifdef _TARGET_ARM64_
-            if (varDsc->TypeGet() == TYP_STRUCT)
+            if (varDsc->lvIsMultiregStruct())
             {
-                if (varDsc->lvExactSize > REGSIZE_BYTES)
-                {
-                    assert(varDsc->lvExactSize <= 2*REGSIZE_BYTES);
+                // Note that regArgNum+1 represents an argument index not an actual argument register.  
+                // see genMapRegArgNumToRegNum(unsigned argNum, var_types type)
 
-                    // Note that regArgNum+1 represents an argument index not an actual argument register.  
-                    // see genMapRegArgNumToRegNum(unsigned argNum, var_types type)
-
-                    // This is the setup for the second half of a MULTIREG struct arg
-                    noway_assert(regArgNum+1 < regState->rsCalleeRegArgNum);
-                    // we better not have added it already (there better not be multiple vars representing this argument register)
-                    noway_assert(regArgTab[regArgNum+1].slot == 0);
+                // This is the setup for the second half of a MULTIREG struct arg
+                noway_assert(regArgNum+1 < regState->rsCalleeRegArgNum);
+                // we better not have added it already (there better not be multiple vars representing this argument register)
+                noway_assert(regArgTab[regArgNum+1].slot == 0);
                     
-                    regArgTab[regArgNum+1].varNum = varNum;
-                    regArgTab[regArgNum+1].slot = 2;
+                regArgTab[regArgNum+1].varNum = varNum;
+                regArgTab[regArgNum+1].slot = 2;
 
-                    slots++;
-                }
+                slots = 2;
             }
-#endif // _TARGET_ARM64_
 #endif // FEATURE_MULTIREG_ARGS
         }
 
@@ -4764,7 +4768,6 @@ void            CodeGen::genFnPrologCalleeRegArgs(regNumber xtraReg,
     }
 
     /* Finally take care of the remaining arguments that must be enregistered */
-
     while (regArgMaskLive)
     {
         regMaskTP regArgMaskLiveSave = regArgMaskLive;
@@ -6736,7 +6739,14 @@ void        CodeGen::genZeroInitFrame(int        untrLclHi,
 #ifdef _TARGET_ARM_
             getEmitter()->emitIns_R_R_I(INS_str, EA_PTRSIZE, rZero1, rAddr, 0);
 #else // _TARGET_ARM_
-            getEmitter()->emitIns_R_R_I(INS_str, EA_PTRSIZE, REG_ZR, rAddr, (uCntBytes - REGSIZE_BYTES) == 0 ? 0 : INS_OPTS_POST_INDEX);
+            if ((uCntBytes - REGSIZE_BYTES) == 0)
+            {
+                getEmitter()->emitIns_R_R_I(INS_str, EA_PTRSIZE, REG_ZR, rAddr, 0);
+            }
+            else
+            {
+                getEmitter()->emitIns_R_R_I(INS_str, EA_PTRSIZE, REG_ZR, rAddr, REGSIZE_BYTES, INS_OPTS_POST_INDEX);
+            }
 #endif // !_TARGET_ARM_
             uCntBytes -= REGSIZE_BYTES;
         }
