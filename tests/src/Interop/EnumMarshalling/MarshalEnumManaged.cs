@@ -24,7 +24,7 @@ namespace EnumRoundtrip
 
         [DllImport("MarshalEnumNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
-        public static extern CdeclEnumDelegate GetFptrCdeclEnum(int i);
+        public static extern CdeclEnumDelegate GetFptrCdeclEnum();
 
 
         #endregion
@@ -43,7 +43,7 @@ namespace EnumRoundtrip
 
             TestFramework.BeginScenario("\n\nTest #1 (Roundtrip of enum).");
 
-            TestFramework.LogInformation(" Case 2: Direct p/invoke cdecl calling convention");
+            TestFramework.LogInformation("Direct p/invoke cdecl calling convention");
             //direct pinvoke - cdecl
             r = CdeclEnum(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
@@ -52,9 +52,9 @@ namespace EnumRoundtrip
                 return 101;
             }
 
-            TestFramework.LogInformation(" Case 4: Delegate p/invoke cdecl calling convention");
+            TestFramework.LogInformation("Delegate p/invoke cdecl calling convention");
             //delegate pincoke - cdecl
-            CdeclEnumDelegate cdecdel = GetFptrCdeclEnum(2);
+            CdeclEnumDelegate cdecdel = GetFptrCdeclEnum();
             r = cdecdel(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
             {
