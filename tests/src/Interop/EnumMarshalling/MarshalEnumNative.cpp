@@ -17,7 +17,7 @@ extern "C" DLL_EXPORT long WINAPI CdeclEnum(int r,BOOL *result)
 }
 
 
-extern "C" DLL_EXPORT voidPtr WINAPI GetFptr()
+extern "C" DLL_EXPORT voidPtr WINAPI GetFptr(int i)
 {
-	(voidPtr) &CdeclEnum;
+	return (voidPtr) &CdeclEnum;
 }
